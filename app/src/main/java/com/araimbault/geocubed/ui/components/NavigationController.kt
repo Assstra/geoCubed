@@ -8,14 +8,18 @@ import com.araimbault.geocubed.data.ScoreViewModel
 
 @Composable
 fun NavController(navController: NavHostController, scoreState: ScoreViewModel) {
-    NavHost(navController, startDestination = "destination_screen1") {
-        composable("destination_screen1") {
+    NavHost(navController, startDestination = Screens.Screen1.route) {
+        composable(Screens.Screen1.route) {
             NavigationBottomBar(navController)
             Screen1(navController, scoreState)
         }
-        composable("destination_screen2") {
+        composable(Screens.Screen2.route) {
             NavigationBottomBar(navController)
             Screen2(navController, scoreState)
+        }
+        composable(Screens.Map.route) {
+            NavigationBottomBar(navController)
+            Screen3(navController)
         }
     }
 }

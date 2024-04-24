@@ -1,25 +1,27 @@
 package com.araimbault.geocubed.ui.components
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavigationBottomBar(navController: NavController) {
+    var navigationSelectedItem by remember {
+        mutableIntStateOf(0)
+    }
     Scaffold(
-        topBar = {
+        /*topBar = {
             TopAppBar(
                 title = { Text(text = "My App") },
                 navigationIcon = {
@@ -28,21 +30,25 @@ fun NavigationBottomBar(navController: NavController) {
                     }
                 }
             )
-        },
+        },*/
         bottomBar = {
             BottomAppBar {
-                NavigationBarItem(
-                    icon = { Icon(Icons.Filled.Home, contentDescription = "Home") },
-                    label = { Text("Screen 1") },
-                    selected = true,
-                    onClick = {navController.navigate("destination_screen1")}
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Filled.Favorite, contentDescription = "Favorites") },
-                    label = { Text("Screen 2") },
-                    selected = false,
-                    onClick = {navController.navigate("destination_screen2")}
-                )
+                BottomNavigationItem().bottomNavigationItems()
+                    .forEachIndexed { index, navigationItem ->
+                        NavigationBarItem(
+                            selected = index == navigationSelectedItem,
+                            label = {
+                                Text(navigationItem.label)
+                            },
+                            icon = {
+                                Icon(
+                                    navigationItem.icon,
+                                    contentDescription = navigationItem.label
+                                )
+                            },
+                            onClick = { navController.navigate(navigationItem.route) }
+                        )
+                    }
             }
         },
         content = { /* Content goes here */ }
