@@ -4,6 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.lifecycle.ViewModel
 
+/*
 class ScoreViewModel : ViewModel() {
     private var _score: MutableState<Int> = mutableIntStateOf(0)
 
@@ -16,4 +17,4 @@ class ScoreViewModel : ViewModel() {
     fun decreaseScore() {
         _score.value = _score.value - 1
     }
-}
+}*/

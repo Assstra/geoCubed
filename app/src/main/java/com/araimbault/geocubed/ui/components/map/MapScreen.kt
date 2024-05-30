@@ -1,22 +1,43 @@
-package com.araimbault.geocubed.ui.components
+package com.araimbault.geocubed.ui.components.map
 
+import android.location.Location
+import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
-fun Screen3(navController: NavController) {
+fun MapScreen(navController: NavController, fusedLocationProviderClient: FusedLocationProviderClient) {
+
     val singapore = LatLng(1.35, 103.87)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(singapore, 10f)
     }
+
+    val current = LocalContext.current
+
+
+    fusedLocationProviderClient.lastLocation
+        .addOnSuccessListener {
+            // Got last known location. In some rare situations this can be null.
+            println(it)
+            Toast.makeText(
+                current,
+                "Approximate location access already granted.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
     GoogleMap(
         modifier = Modifier.fillMaxSize(),
         cameraPositionState = cameraPositionState
@@ -27,5 +48,4 @@ fun Screen3(navController: NavController) {
             snippet = "Marker in Singapore"
         )
     }
-
 }
