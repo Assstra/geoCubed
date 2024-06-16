@@ -1,16 +1,10 @@
 package com.araimbault.geocubed.ui.components.map
 
-import android.location.Location
-import android.widget.Toast
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import com.araimbault.geocubed.data.UserLocationViewModel
 import com.google.android.gms.maps.model.CameraPosition
@@ -32,15 +26,21 @@ fun MapScreen(
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(userLocation, 10f)
     }
-
-    GoogleMap(
-        modifier = Modifier.fillMaxSize(),
-        cameraPositionState = cameraPositionState
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
     ) {
-        Marker(
-            state = MarkerState(position = userLocation),
-            title = "Singapore",
-            snippet = "Marker in Singapore"
-        )
+
+        GoogleMap(
+            modifier = Modifier.fillMaxSize(),
+            cameraPositionState = cameraPositionState
+        ) {
+            Marker(
+                state = MarkerState(position = userLocation),
+                title = "Singapore",
+                snippet = "Marker in Singapore"
+            )
+        }
+        SearchBar()
     }
 }
