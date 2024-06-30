@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="research_title">Rechercher</string>
+    <string name="current_location">Localisation actuelle</string>
+    <string name="current_location_message">Vous êtes ici !</string>
+    <string name="current_destination">Votre destination</string>
+</resources>
