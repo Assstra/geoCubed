@@ -6,8 +6,9 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class Screens(val route : String) {
-    data object Camera : Screens("destination_screen1")
-    data object Map : Screens("destination_screen2")
+    data object Map : Screens("destination_screen1")
+    data object Direction : Screens("destination_screen2")
+    data object Camera : Screens("destination_screen3")
 }
 
 //initializing the data class with default parameters
@@ -17,18 +18,18 @@ data class BottomNavigationItem(
     val route : String = "destination_screen1"
 ) {
 
-    //function to get the list of bottomNavigationItems
+    // Function to get the list of bottomNavigationItems
     fun bottomNavigationItems() : List<BottomNavigationItem> {
         return listOf(
             BottomNavigationItem(
                 label = "Home",
                 icon = Icons.Filled.Home,
-                route = Screens.Camera.route
+                route = Screens.Map.route
             ),
             BottomNavigationItem(
                 label = "Profile",
                 icon = Icons.Filled.LocationOn,
-                route = Screens.Map.route
+                route = Screens.Camera.route
             ),
         )
     }

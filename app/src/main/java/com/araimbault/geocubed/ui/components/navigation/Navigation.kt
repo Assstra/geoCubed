@@ -16,7 +16,7 @@ import androidx.navigation.NavController
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavigationBottomBar(navController: NavController) {
-    var navigationSelectedItem by remember {
+    val navigationSelectedItem by remember {
         mutableIntStateOf(0)
     }
     Scaffold(
