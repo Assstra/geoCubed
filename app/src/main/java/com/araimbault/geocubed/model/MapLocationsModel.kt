@@ -15,8 +15,9 @@ data class Location(
 
 data class Properties(
     val name: String,
-    val country: String
-    // other properties...
+    val country: String,
+    val street: String,
+    val locality: String
 )
 
 

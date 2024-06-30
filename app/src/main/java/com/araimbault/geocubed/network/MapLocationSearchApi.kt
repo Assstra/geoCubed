@@ -12,17 +12,17 @@ import java.nio.charset.StandardCharsets
 
 
 private const val BASE_URL = "https://api.openrouteservice.org"
-private const val API_KEY = "5b3ce3597851110001cf62489176bfa4bd2e483893887b966900d1ae"
+private const val API_KEY = "5b3ce3597851110001cf62489176bfa4bd2e483893887b966900d1ae" // TODO : change that
 
-val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor();
-var client: OkHttpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
+val locationInterceptor: HttpLoggingInterceptor = HttpLoggingInterceptor();
+var locationClient: OkHttpClient = OkHttpClient.Builder().addInterceptor(locationInterceptor).build()
 
 /**
  * Retrofit object using a kotlinx.serialization converter
  */
 
 private val retrofit = Retrofit.Builder()
-    .client(client)
+    .client(locationClient)
     .addConverterFactory(GsonConverterFactory.create())
     .baseUrl(BASE_URL)
     .build()
